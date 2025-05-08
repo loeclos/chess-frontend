@@ -35,9 +35,7 @@ interface Alert {
 export default function Game({ initialColor = 'white' }: GameProps) {
     const [game, setGame] = useState<Chess>(new Chess());
     const [socket, setSocket] = useState<Socket | null>(null);
-    const playerColor = useState<'white' | 'black'>(
-        initialColor
-    );
+    const playerColor: 'white' | 'black' = initialColor;
     const [moveColor, setMoveColor] = useState<'w' | 'b'>('w');
     const [gameHasStarted, setGameHasStarted] = useState(false);
     const [gameOver, setGameOver] = useState(false);
@@ -285,7 +283,7 @@ export default function Game({ initialColor = 'white' }: GameProps) {
                             Game Link:{' '}
                             <CopyToClipboard
                                 text={`${
-                                    playerColor[0] === 'white'
+                                    playerColor === 'white'
                                         ? 'localhost:3000/black?code='
                                         : 'localhost:3000/white?code='
                                 }${gameCode}`}
