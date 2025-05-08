@@ -7,6 +7,7 @@ import { io, Socket } from 'socket.io-client';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { Home } from 'lucide-react';
+import { Suspense } from 'react';
 import { CopyToClipboard } from '@/components/ui/copy-to-clipboard';
 
 interface GameProps {
@@ -232,6 +233,7 @@ export default function Game({ initialColor = 'white' }: GameProps) {
     }, []);
 
     return (
+        <Suspense>
         <div className="flex flex-col items-center justify-center min-h-screen p-4">
             <div className="w-full max-w-2xl">
                 <div className="mb-4">
@@ -330,5 +332,6 @@ export default function Game({ initialColor = 'white' }: GameProps) {
                 </div>
             </div>
         </div>
+        </Suspense>
     );
 }
