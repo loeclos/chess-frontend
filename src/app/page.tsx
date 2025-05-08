@@ -66,7 +66,7 @@ function isValidUUID(uuidString: string): boolean {
 export default function Home() {
     const [alerts, setAlerts] = useState<AlertType[]>([]);
     const codeInput = useRef<HTMLInputElement>(null);
-    const colors = ['white', 'black'];
+    // const colors = ['white', 'black'];
     // const randomColor = colors[Math.floor(Math.random() * colors.length)];
 
     // useEffect gets HTML elements on mount.
