@@ -285,7 +285,7 @@ export default function Game({ initialColor = 'white' }: GameProps) {
                             Game Link:{' '}
                             <CopyToClipboard
                                 text={`${
-                                    playerColor === 'white'
+                                    playerColor[0] === 'white'
                                         ? 'localhost:3000/black?code='
                                         : 'localhost:3000/white?code='
                                 }${gameCode}`}
