@@ -131,7 +131,7 @@ export default function Game({ initialColor = 'white' }: GameProps) {
         piece: string;
         sourceSquare: string;
     }): boolean => {
-        if (!gameHasStarted) return false;
+        // if (!gameHasStarted) return false;
         if (piece.startsWith(playerColor[0])) {
             return true;
         }
