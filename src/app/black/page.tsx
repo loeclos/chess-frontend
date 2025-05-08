@@ -1,7 +1,10 @@
 import Game from '@/components/game';
+import { Suspense } from 'react';
 
 export default function Page() {
     return (
-        <Game initialColor='black' />
-    )
+        <Suspense fallback={<div>Loading...</div>}>
+            <Game initialColor='black' />
+        </Suspense>
+    );
 }
