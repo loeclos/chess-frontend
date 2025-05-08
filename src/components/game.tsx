@@ -90,7 +90,13 @@ export default function Game({ initialColor = 'white' }: GameProps) {
         setPgn(game.pgn());
     };
 
-    const makeAMove = (move) => {
+    interface MakeMoveParams {
+        from: string;
+        to: string;
+        promotion?: 'q' | 'r' | 'b' | 'n';
+    }
+
+    const makeAMove = (move: MakeMoveParams): ReturnType<Chess['move']> => {
         const gameCopy = new Chess(game.fen());
         console.log(move);
         const result = gameCopy.move(move);
