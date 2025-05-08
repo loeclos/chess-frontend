@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Roboto_Slab } from "next/font/google";
 import * as dotenv from 'dotenv';
 import "./globals.css";
-import { io } from 'socket.io-client';
 
 dotenv.config();
 
