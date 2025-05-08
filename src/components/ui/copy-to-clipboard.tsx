@@ -30,7 +30,7 @@ export function CopyToClipboard({ text, className, showBackground = true }: Copy
       }, 2000)
     } catch (error) {
       toast("Failed to copy", {
-        description: "Could not copy text to clipboard",
+        description: `Could not copy text to clipboard: ${error}`,
       })
     }
   }
@@ -43,7 +43,7 @@ export function CopyToClipboard({ text, className, showBackground = true }: Copy
         className,
       )}
     >
-      <div className="truncate text-sm text-muted-foreground">{text}</div>
+      <div className="truncate text-sm text-muted-foreground select-all">{text}</div>
       <Button size="sm" variant="ghost" className="h-8 px-2" onClick={copyToClipboard} aria-label="Copy to clipboard">
         {isCopied ? <Check className="h-4 w-4 text-green-500" /> : <Copy className="h-4 w-4" />}
       </Button>

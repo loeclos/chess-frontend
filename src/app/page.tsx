@@ -2,12 +2,10 @@
 
 import { v4, validate, version } from 'uuid';
 import { AlertType } from '@/types/alerts';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { Terminal } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
-import { CopyToClipboard } from '@/components/ui/copy-to-clipboard';
 import {
     Card,
     CardContent,
@@ -66,10 +64,10 @@ function isValidUUID(uuidString: string): boolean {
 }
 
 export default function Home() {
-    let [alerts, setAlerts] = useState<AlertType[]>([]);
-    let codeInput = useRef<HTMLInputElement>(null);
+    const [alerts, setAlerts] = useState<AlertType[]>([]);
+    const codeInput = useRef<HTMLInputElement>(null);
     const colors = ['white', 'black'];
-    const randomColor = colors[Math.floor(Math.random() * colors.length)];
+    // const randomColor = colors[Math.floor(Math.random() * colors.length)];
 
     // useEffect gets HTML elements on mount.
     // useEffect(() => {
