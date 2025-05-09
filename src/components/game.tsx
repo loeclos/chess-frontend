@@ -285,8 +285,8 @@ export default function Game({ initialColor = 'white' }: GameProps) {
                             <CopyToClipboard
                                 text={`${
                                     playerColor === 'white'
-                                        ? 'https://chess-frontend-pied.vercel.app/black?code='
-                                        : 'https://chess-frontend-pied.vercel.app/white?code='
+                                        ? 'https://chessgame-85747.vercel.app/black?code='
+                                        : 'https://chessgame-85747.vercel.app/white?code='
                                 }${gameCode}`}
                             />
                         </div>
