@@ -2,6 +2,7 @@
 
 import { Chessboard } from 'react-chessboard';
 import { Chess } from 'chess.js';
+import { TouchBackend } from "react-dnd-touch-backend";
 import { useState, useEffect, useMemo } from 'react';
 import { io, Socket } from 'socket.io-client';
 import { useSearchParams } from 'next/navigation';
@@ -61,32 +62,34 @@ export default function Game({ initialColor = 'white' }: GameProps) {
         }, 5000);
     };
 
-    const updateStatus = (): void => {
-        let statusText = '';
-        setMoveColor(game.turn());
-        const moveColorString = moveColor === 'w' ? 'White' : 'Black';
+const updateStatus = (): void => {
+    let statusText = '';
+    const turn = game.turn();
+    const moveColorString = turn === 'w' ? 'White' : 'Black';
 
-        if (game.isCheckmate()) {
-            statusText = 'Game over, ' + moveColorString + ' is in checkmate.';
-            appendAlert('Game Over', statusText, 'success');
-            setGameOver(true);
-        } else if (game.isDraw()) {
-            statusText = 'Game over, drawn position';
-            appendAlert('Draw', statusText, 'success');
-            setGameOver(true);
-        } else if (gameOver) {
-            statusText = 'Opponent disconnected, you win!';
-        } else if (!gameHasStarted) {
-            statusText = 'Waiting for opponent to join';
-        } else {
-            statusText = moveColorString + ' to move';
-            if (game.isCheck())
-                statusText += ', ' + moveColorString + ' is in check';
-        }
+    if (game.isCheckmate()) {
+        statusText = 'Game over, ' + moveColorString + ' is in checkmate.';
+        appendAlert('Game Over', statusText, 'success');
+        setGameOver(true);
+    } else if (game.isDraw()) {
+        statusText = 'Game over, drawn position';
+        appendAlert('Draw', statusText, 'success');
+        setGameOver(true);
+    } else if (gameOver) {
+        statusText = 'Opponent disconnected, you win!';
+    } else if (!gameHasStarted) {
+        statusText = 'Waiting for opponent to join';
+    } else {
+        statusText = moveColorString + ' to move';
+        if (game.isCheck())
+            statusText += ', ' + moveColorString + ' is in check';
+    }
 
-        setStatus(statusText);
-        setPgn(game.pgn());
-    };
+    setStatus(statusText);
+    setPgn(game.pgn());
+    setMoveColor(turn); // keep moveColor in sync if you need it elsewhere
+};
+
 
     interface MakeMoveParams {
         from: string;
@@ -319,6 +322,8 @@ export default function Game({ initialColor = 'white' }: GameProps) {
                             backgroundColor: '#edeed1',
                         }}
                         customPieces={customPieces}
+                        customDndBackend={TouchBackend}
+                        customDndBackendOptions={{ enableMouseEvents: true }}
                     />
                 </div>
 
