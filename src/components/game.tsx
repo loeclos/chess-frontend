@@ -37,7 +37,6 @@ export default function Game({ initialColor = 'white' }: GameProps) {
     const [game, setGame] = useState<Chess>(new Chess());
     const [socket, setSocket] = useState<Socket | null>(null);
     const playerColor: 'white' | 'black' = initialColor;
-    const [moveColor, setMoveColor] = useState<'w' | 'b'>('w');
     const [gameHasStarted, setGameHasStarted] = useState(false);
     const [gameOver, setGameOver] = useState(false);
     const [status, setStatus] = useState('Waiting for opponent to join');
@@ -87,7 +86,6 @@ const updateStatus = (): void => {
 
     setStatus(statusText);
     setPgn(game.pgn());
-    setMoveColor(turn); // keep moveColor in sync if you need it elsewhere
 };
 
 
