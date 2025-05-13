@@ -2,7 +2,7 @@
 
 import { v4, validate, version } from 'uuid';
 import { AlertType } from '@/types/alerts';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { Terminal } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
@@ -69,10 +69,15 @@ export default function Home() {
     // const colors = ['white', 'black'];
     // const randomColor = colors[Math.floor(Math.random() * colors.length)];
 
-    // useEffect gets HTML elements on mount.
-    // useEffect(() => {
-    //     codeInput = document.querySelector<HTMLInputElement>('#codeInput');
-    // }, []);
+    useEffect(() => {
+        codeInput.current?.addEventListener('keydown', function (event) {
+            if (event.keyCode === 13 || event.key === 'Enter') {
+                // Your code to execute when Enter is pressed goes here
+                console.log('Enter key pressed!');
+                // For example, submit a form: inputField.form.submit();
+            }
+        });
+    }, []);
 
     const createAlert = ({
         message: message,
@@ -116,13 +121,18 @@ export default function Home() {
         }
     };
 
+    const onPlayBotClick = () => {
+        window.location.replace(`/bot`);
+    }
+
+
     return (
         <>
             <div className="flex text-center justify-center py-30">
                 <div>
                     <h2 className="text-4xl font-bold py-10">Chess Game</h2>
                     <Tabs defaultValue="createGame" className="md:w-[400px]">
-                        <TabsList className="grid w-full grid-cols-2">
+                        <TabsList className="grid w-full grid-cols-3">
                             <TabsTrigger
                                 value="createGame"
                                 className="transition-colors duration-200"
@@ -135,6 +145,12 @@ export default function Home() {
                             >
                                 Join Game
                             </TabsTrigger>
+                            <TabsTrigger
+                                value="playBot"
+                                className="transition-colors duration-200"
+                            >
+                                Play Bot
+                            </TabsTrigger>
                         </TabsList>
                         <TabsContent value="createGame">
                             <Card>
@@ -146,8 +162,7 @@ export default function Home() {
                                         friends to play together.
                                     </CardDescription>
                                 </CardHeader>
-                                <CardContent>
-                                </CardContent>
+                                <CardContent></CardContent>
                                 <CardFooter className="flex justify-center items-center">
                                     <Button
                                         id="createGame"
@@ -174,7 +189,11 @@ export default function Home() {
                                 <CardContent className="space-y-2 text-center">
                                     <div className="space-y-1">
                                         <Label htmlFor="new">Game Code</Label>
-                                        <Input id="codeInput" type="text" ref={codeInput} />
+                                        <Input
+                                            id="codeInput"
+                                            type="text"
+                                            ref={codeInput}
+                                        />
                                     </div>
                                 </CardContent>
                                 <CardFooter className="flex justify-center items-center">
@@ -183,6 +202,30 @@ export default function Home() {
                                         className="cursor-pointer"
                                         onClick={() => {
                                             onJoinGameClick();
+                                        }}
+                                    >
+                                        Proceed
+                                    </Button>
+                                </CardFooter>
+                            </Card>
+                        </TabsContent>
+                        <TabsContent value="playBot">
+                            <Card>
+                                <CardHeader>
+                                    <CardTitle>Play Against Bot</CardTitle>
+                                    <CardDescription>
+                                        A new game code will be generated which
+                                        you then will be able to share with your
+                                        friends to play together.
+                                    </CardDescription>
+                                </CardHeader>
+                                <CardContent></CardContent>
+                                <CardFooter className="flex justify-center items-center">
+                                    <Button
+                                        id="playBot"
+                                        className="cursor-pointer"
+                                        onClick={() => {
+                                        onPlayBotClick();
                                         }}
                                     >
                                         Proceed

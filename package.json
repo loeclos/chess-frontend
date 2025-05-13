@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@radix-ui/react-alert-dialog": "^1.1.13",
+    "@radix-ui/react-dialog": "^1.1.13",
     "@radix-ui/react-label": "^2.1.6",
     "@radix-ui/react-slot": "^1.2.2",
     "@radix-ui/react-tabs": "^1.1.11",
@@ -32,10 +33,12 @@
     "postcss": "^8.5.3",
     "react": "^19.0.0",
     "react-chessboard": "^4.7.3",
+    "react-dnd": "^16.0.1",
     "react-dnd-touch-backend": "^16.0.1",
     "socket.io": "^4.8.1",
     "socket.io-client": "^4.8.1",
     "sonner": "^2.0.3",
+    "stockfish": "^16.0.0",
     "tailwind-merge": "^3.2.0",
     "uuid": "^11.1.0"
   },
