@@ -220,7 +220,6 @@ export default function Game({
         gameOver,
         engine,
         makeMove,
-        playerColor,
         difficulty,
         updateGameState,
     ]);

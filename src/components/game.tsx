@@ -104,7 +104,7 @@ export default function Game({ initialColor = 'white' }: GameProps) {
         ) {
             setSelectedSquare(null);
         }
-    }, [game]);
+    }, [game, playerColor]);
 
     // Updated onDrop function
     const onDrop = useCallback(
@@ -137,6 +137,7 @@ export default function Game({ initialColor = 'white' }: GameProps) {
         [
             game,
             gameHasStarted,
+            playerColor,
             makeAMove,
             socket,
             updateStatus,
@@ -241,7 +242,7 @@ export default function Game({ initialColor = 'white' }: GameProps) {
             }
             return piece.startsWith(playerColor[0]);
         },
-        [game, gameHasStarted, gameOver]
+        [game, gameHasStarted, gameOver, playerColor]
     );
 
     const pieces = [
@@ -276,7 +277,7 @@ export default function Game({ initialColor = 'white' }: GameProps) {
             );
         });
         return pieceComponents;
-    }, [pieces]);
+    }, []);
 
     useEffect(() => {
         const newSocket = io('https://chess-backend-lv8y.onrender.com', {
@@ -327,7 +328,7 @@ export default function Game({ initialColor = 'white' }: GameProps) {
         return () => {
             newSocket.disconnect();
         };
-    }, [game, gameCode, appendAlert, makeAMove, updateStatus]);
+    }, [gameCode, appendAlert, makeAMove, updateStatus]);
 
     useEffect(() => {
         updateStatus();
