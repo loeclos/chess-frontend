@@ -1,7 +1,7 @@
 'use client';
 
 import { Chessboard } from 'react-chessboard';
-import { Chess } from 'chess.js';
+import { Chess, Square } from 'chess.js';
 import { TouchBackend } from 'react-dnd-touch-backend';
 import { useState, useEffect, useMemo, useCallback } from 'react';
 import { io, Socket } from 'socket.io-client';
@@ -148,7 +148,7 @@ export default function Game({ initialColor = 'white' }: GameProps) {
     const onSquareClick = useCallback(
         (square: string) => {
             if (!gameHasStarted || gameOver) return;
-            const piece = game.get(square as any);
+            const piece = game.get(square as Square);
 
             if (selectedSquare === square) {
                 setSelectedSquare(null);
@@ -195,6 +195,7 @@ export default function Game({ initialColor = 'white' }: GameProps) {
         [
             selectedSquare,
             game,
+            playerColor,
             makeAMove,
             socket,
             updateStatus,
@@ -206,7 +207,7 @@ export default function Game({ initialColor = 'white' }: GameProps) {
     const legalMoves = useMemo(() => {
         if (selectedSquare) {
             return game
-                .moves({ square: selectedSquare as any, verbose: true })
+                .moves({ square: selectedSquare as Square, verbose: true })
                 .map((move) => move.to);
         }
         return [];
@@ -277,7 +278,7 @@ export default function Game({ initialColor = 'white' }: GameProps) {
             );
         });
         return pieceComponents;
-    }, []);
+    }, [pieces]);
 
     useEffect(() => {
         const newSocket = io('https://chess-backend-lv8y.onrender.com', {
@@ -342,7 +343,7 @@ export default function Game({ initialColor = 'white' }: GameProps) {
         setPgn('');
         setFen(game.fen());
         setStatus('Waiting for opponent to join');
-    }, [playerColor]);
+    }, [game, playerColor]);
 
     return (
         <div className="flex flex-col items-center justify-center min-h-screen p-4">
@@ -419,6 +420,9 @@ export default function Game({ initialColor = 'white' }: GameProps) {
                     <pre>{pgn || 'No moves yet'}</pre>
                 </div>
             </div>
+            {alerts.length > 0 && (
+                <p></p>
+            )}
         </div>
     );
 }

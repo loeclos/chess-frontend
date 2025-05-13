@@ -1,7 +1,7 @@
 'use client';
 
 import { Chessboard } from 'react-chessboard';
-import { Chess } from 'chess.js';
+import { Chess, Square } from 'chess.js';
 import { TouchBackend } from 'react-dnd-touch-backend';
 import { useState, useEffect, useMemo, useCallback } from 'react';
 import Engine from '@/stockfish/engine';
@@ -263,9 +263,9 @@ export default function Game({
     );
 
     const onSquareClick = useCallback(
-        (square: string) => {
+        (square: Square) => {
             if (gameOver || isThinking) return;
-            const piece = game.get(square as any);
+            const piece = game.get(square);
 
             if (selectedSquare === square) {
                 // Clicking the same square again deselects it
@@ -323,14 +323,14 @@ export default function Game({
     const legalMoves = useMemo(() => {
         if (selectedSquare) {
             return game
-                .moves({ square: selectedSquare as any, verbose: true })
+                .moves({ square: selectedSquare as Square, verbose: true })
                 .map((move) => move.to);
         }
         return [];
     }, [selectedSquare, game]);
 
     const squareStyles = useMemo(() => {
-        const styles: Record<string, any> = {};
+        const styles: Record<string, React.CSSProperties> = {};
         if (selectedSquare) {
             // Style for the selected square
             styles[selectedSquare] = {
@@ -394,7 +394,7 @@ export default function Game({
             );
         });
         return pieceComponents;
-    }, []);
+    }, [pieces]);
 
     useEffect(() => {
         if (isComputerMove && !gameOver) {
