@@ -5,8 +5,11 @@ import { Chess, Square } from 'chess.js';
 import { TouchBackend } from 'react-dnd-touch-backend';
 import { useState, useEffect, useMemo, useCallback } from 'react';
 import Engine from '@/stockfish/engine';
+import DiffLevel from '@/components/diff-level';
 import Link from 'next/link';
 import { Home, Brain, RotateCcw } from 'lucide-react';
+import { Status } from '@/types/diff';
+
 
 interface GameProps {
     initialColor?: 'white' | 'black';
@@ -49,6 +52,9 @@ export default function Game({
         playerColor === 'black'
     );
     const [selectedSquare, setSelectedSquare] = useState<string | null>(null);
+    const [selectedStatus, setSelectedStatus] = useState<Status | null>(
+        { value: 'easy', label: 'Easy' }
+    );
 
     const engine = useMemo(() => new Engine(), []);
 
@@ -419,6 +425,26 @@ export default function Game({
     }, [playerColor]);
 
     useEffect(() => {
+        switch (selectedStatus?.value) {
+            case 'easy':
+                engine.setDifficulty(4);
+                break;
+            case 'medium':
+                engine.setDifficulty(8);
+                break;
+            case 'medium rare':
+                engine.setDifficulty(12);
+                break;
+            case 'hard':
+                engine.setDifficulty(16);
+                break;
+            case 'very hard':
+                engine.setDifficulty(20);
+                break;
+        }
+    }, [selectedStatus])
+
+    useEffect(() => {
         updateGameState();
     }, [game, updateGameState]);
 
@@ -455,6 +481,10 @@ export default function Game({
                             <Home className="h-5 w-5" />
                             Home
                         </Link>
+                        <DiffLevel
+                            selectedStatus={selectedStatus}
+                            setSelectedStatus={setSelectedStatus}
+                        />
                         <button
                             onClick={resetGame}
                             className="flex items-center gap-2 hover:text-blue-500 transition-colors duration-200"
