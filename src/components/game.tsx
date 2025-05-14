@@ -222,7 +222,7 @@ export default function Game({ initialColor = 'white' }: GameProps) {
             legalMoves.forEach((square) => {
                 styles[square] = {
                     backgroundImage:
-                        'radial-gradient(circle, rgba(184, 184, 184, 0.8) 0%, rgba(184, 184, 184, 0.8) 20%, transparent 20%)',
+                        'radial-gradient(circle, rgba(184, 1844, 18, 0.8) 0%, rgba(184, 184, 184, 0.8) 20%, transparent 20%)',
                     backgroundPosition: 'center',
                     backgroundRepeat: 'no-repeat',
                 };
@@ -401,10 +401,10 @@ export default function Game({ initialColor = 'white' }: GameProps) {
                             borderRadius: '15px',
                         }}
                         customDarkSquareStyle={{
-                            backgroundColor: '#779952',
+                            backgroundColor: '#6D98BA',
                         }}
                         customLightSquareStyle={{
-                            backgroundColor: '#edeed1',
+                            backgroundColor: '#F5F1ED',
                         }}
                         customPieces={customPieces}
                         customSquareStyles={squareStyles}

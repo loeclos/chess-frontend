@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Roboto_Slab } from "next/font/google";
 import * as dotenv from 'dotenv';
+import Navbar from '@/components/navbar';
 import "./globals.css";
 
 dotenv.config();
@@ -25,6 +26,7 @@ export default function RootLayout({
       <body
         className={`${robotoSlab.className} antialiased`}
       >
+        <Navbar />
         {children}
       </body>
     </html>

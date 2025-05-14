@@ -473,21 +473,15 @@ export default function Game({
         <div className="flex flex-col items-center justify-center min-h-screen p-4">
             <div className="w-full max-w-2xl">
                 <div className="mb-4">
-                    <div className="mb-2 p-2 border-2 border-zinc-100 rounded-xl flex items-center justify-between">
-                        <Link
-                            href={'/'}
-                            className="flex items-center gap-2 hover:text-blue-500 transition-colors duration-200"
-                        >
-                            <Home className="h-5 w-5" />
-                            Home
-                        </Link>
+                    <div className="grid grid-rows-2 md:grid-rows-1 md:grid-cols-2 gap-2 py-2 px-5 my-5 border-2 border-zinc-100 rounded-xl">
                         <DiffLevel
                             selectedStatus={selectedStatus}
                             setSelectedStatus={setSelectedStatus}
+                            className='min-w-full max-w-full flex items-center justify-center'
                         />
                         <button
                             onClick={resetGame}
-                            className="flex items-center gap-2 hover:text-blue-500 transition-colors duration-200"
+                            className="flex items-center justify-center text-center gap-2 w-full hover:text-blue-500 transition-colors duration-200"
                         >
                             <RotateCcw className="h-5 w-5" />
                             Reset Game
@@ -530,7 +524,7 @@ export default function Game({
                                 <span className="font-bold">{playerColor}</span>
                             </p>
                         </div>
-                        <div className="flex items-center gap-2">
+                        {/* <div className="flex items-center gap-2">
                             <Brain className="h-5 w-5" />
                             <span
                                 className={`font-medium ${
@@ -545,7 +539,7 @@ export default function Game({
                             >
                                 {formatEvaluation()}
                             </span>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
 
@@ -563,10 +557,10 @@ export default function Game({
                                 '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
                         }}
                         customDarkSquareStyle={{
-                            backgroundColor: '#779952',
+                            backgroundColor: '#6D98BA',
                         }}
                         customLightSquareStyle={{
-                            backgroundColor: '#edeed1',
+                            backgroundColor: '#F5F1ED',
                         }}
                         customPieces={customPieces}
                         customSquareStyles={squareStyles}

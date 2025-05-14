@@ -166,7 +166,7 @@ export default function Home() {
                                 <CardFooter className="flex justify-center items-center">
                                     <Button
                                         id="createGame"
-                                        className="cursor-pointer"
+                                        className="cursor-pointer bg-[#022B3A]"
                                         onClick={() => {
                                             onCreateGameClick();
                                         }}
@@ -199,7 +199,7 @@ export default function Home() {
                                 <CardFooter className="flex justify-center items-center">
                                     <Button
                                         id="joinGame"
-                                        className="cursor-pointer"
+                                        className="cursor-pointer bg-[#022B3A]"
                                         onClick={() => {
                                             onJoinGameClick();
                                         }}
@@ -223,7 +223,7 @@ export default function Home() {
                                 <CardFooter className="flex justify-center items-center">
                                     <Button
                                         id="playBot"
-                                        className="cursor-pointer"
+                                        className="cursor-pointer bg-[#022B3A]"
                                         onClick={() => {
                                         onPlayBotClick();
                                         }}

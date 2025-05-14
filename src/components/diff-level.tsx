@@ -44,7 +44,15 @@ const statuses: Status[] = [
     },
 ];
 
-export default function DiffLevel({ selectedStatus, setSelectedStatus }: { selectedStatus: Status | null, setSelectedStatus: (status: Status | null) => void }) {
+export default function DiffLevel({
+    selectedStatus,
+    setSelectedStatus,
+    className,
+}: {
+    selectedStatus: Status | null;
+    setSelectedStatus: (status: Status | null) => void;
+    className?: string;
+}) {
     const [open, setOpen] = React.useState(false);
     const isDesktop = useMediaQuery('(min-width: 768px)');
 
@@ -55,7 +63,7 @@ export default function DiffLevel({ selectedStatus, setSelectedStatus }: { selec
                 <PopoverTrigger asChild>
                     <Button
                         variant="outline"
-                        className="w-[150px] justify-start"
+                        className={`w-[150px] justify-start ${className}`}
                     >
                         {selectedStatus ? (
                             <>{selectedStatus.label}</>
