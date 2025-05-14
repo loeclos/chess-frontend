@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { useRouter } from 'next/navigation';
+import { Home } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -18,6 +19,7 @@ const Navbar: React.FC = () => {
                 onClick={handleHomeClick}
                 className="w-full md:w-min bg-[#4682a8] text-white px-4 py-2 rounded-md hover:bg-[#6d98ba] transition-colors duration-300 cursor-pointer"
             >
+                <Home className="mr-2" />
                 Home
             </button>
             <Link href={'https://github.com/valdemirum/chess-frontend'} className="flex items-center ml-auto">

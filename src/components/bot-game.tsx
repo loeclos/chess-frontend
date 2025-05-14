@@ -6,8 +6,7 @@ import { TouchBackend } from 'react-dnd-touch-backend';
 import { useState, useEffect, useMemo, useCallback } from 'react';
 import Engine from '@/stockfish/engine';
 import DiffLevel from '@/components/diff-level';
-import Link from 'next/link';
-import { Home, Brain, RotateCcw } from 'lucide-react';
+import { Brain, RotateCcw } from 'lucide-react';
 import { Status } from '@/types/diff';
 
 
@@ -524,7 +523,7 @@ export default function Game({
                                 <span className="font-bold">{playerColor}</span>
                             </p>
                         </div>
-                        {/* <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-2 display-none">
                             <Brain className="h-5 w-5" />
                             <span
                                 className={`font-medium ${
@@ -539,7 +538,7 @@ export default function Game({
                             >
                                 {formatEvaluation()}
                             </span>
-                        </div> */}
+                        </div>
                     </div>
                 </div>
 
