@@ -281,7 +281,7 @@ export default function Game({ initialColor = 'white' }: GameProps) {
     }, [pieces]);
 
     useEffect(() => {
-        const newSocket = io('https://chess-backend-lv8y.onrender.com', {
+        const newSocket = io('https://chess-backend-lv8y.onrender.com/api', {
             transports: ['websocket'],
             reconnectionAttempts: 5,
             reconnectionDelay: 1000,
