@@ -284,10 +284,11 @@ export default function Game({ initialColor = 'white' }: GameProps) {
         const newSocket = io('https://chess-backend-lv8y.onrender.com', {
             reconnectionAttempts: 5,
             reconnectionDelay: 1000,
+            // Remove transports: ['websocket'] to allow fallback to polling
         });
 
         newSocket.on('connect', () => {
-            console.log('Connected to server');
+            console.log('Connected to server, socket ID:', newSocket.id);
             setConnectionStatus('Connected');
             if (gameCode) {
                 console.log('Joining game with code:', gameCode);
@@ -305,6 +306,7 @@ export default function Game({ initialColor = 'white' }: GameProps) {
         });
 
         newSocket.on('new-move', (move) => {
+            console.log('Received move:', move);
             const result = makeAMove(move);
             if (result) {
                 updateStatus();
@@ -314,6 +316,7 @@ export default function Game({ initialColor = 'white' }: GameProps) {
         });
 
         newSocket.on('game-over-disconnect', () => {
+            console.log('Game over: opponent disconnected');
             setGameOver(true);
             appendAlert(
                 'Opponent Left',
@@ -324,15 +327,26 @@ export default function Game({ initialColor = 'white' }: GameProps) {
         });
 
         newSocket.on('connect_error', (err) => {
-            console.error('Connection error:', err.message);
-            setConnectionStatus('Connection error - check server');
+            console.error('Connection error:', err.message, err);
+            setConnectionStatus(`Connection error: ${err.message}`);
+        });
+
+        newSocket.on('reconnect_attempt', (attempt) => {
+            console.log(`Reconnection attempt ${attempt}`);
+        });
+
+        newSocket.on('reconnect_failed', () => {
+            console.error('Reconnection failed after 5 attempts');
+            setConnectionStatus('Failed to reconnect - check server');
         });
 
         setSocket(newSocket);
         return () => {
+            console.log('Disconnecting socket');
             newSocket.disconnect();
         };
     }, [gameCode, appendAlert, makeAMove, updateStatus]);
+    
     useEffect(() => {
         updateStatus();
     }, [game, gameHasStarted, gameOver, updateStatus]);
