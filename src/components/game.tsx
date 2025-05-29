@@ -281,8 +281,7 @@ export default function Game({ initialColor = 'white' }: GameProps) {
     }, [pieces]);
 
     useEffect(() => {
-        const newSocket = io('wss://chess-backend-lv8y.onrender.com', {
-            transports: ['websocket'],
+        const newSocket = io('https://chess-backend-lv8y.onrender.com', {
             reconnectionAttempts: 5,
             reconnectionDelay: 1000,
         });
@@ -291,7 +290,10 @@ export default function Game({ initialColor = 'white' }: GameProps) {
             console.log('Connected to server');
             setConnectionStatus('Connected');
             if (gameCode) {
+                console.log('Joining game with code:', gameCode);
                 newSocket.emit('join-game', { code: gameCode });
+            } else {
+                console.warn('No gameCode provided');
             }
         });
 
@@ -302,7 +304,7 @@ export default function Game({ initialColor = 'white' }: GameProps) {
             appendAlert('Game Started', 'Your opponent has joined!', 'success');
         });
 
-        newSocket.on('new-move', (move: ChessMove) => {
+        newSocket.on('new-move', (move) => {
             const result = makeAMove(move);
             if (result) {
                 updateStatus();
@@ -311,7 +313,7 @@ export default function Game({ initialColor = 'white' }: GameProps) {
             }
         });
 
-        newSocket.on('game-over', () => {
+        newSocket.on('game-over-disconnect', () => {
             setGameOver(true);
             appendAlert(
                 'Opponent Left',
@@ -321,7 +323,8 @@ export default function Game({ initialColor = 'white' }: GameProps) {
             updateStatus();
         });
 
-        newSocket.on('connect_error', () => {
+        newSocket.on('connect_error', (err) => {
+            console.error('Connection error:', err.message);
             setConnectionStatus('Connection error - check server');
         });
 
@@ -330,7 +333,6 @@ export default function Game({ initialColor = 'white' }: GameProps) {
             newSocket.disconnect();
         };
     }, [gameCode, appendAlert, makeAMove, updateStatus]);
-
     useEffect(() => {
         updateStatus();
     }, [game, gameHasStarted, gameOver, updateStatus]);
