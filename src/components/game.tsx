@@ -351,7 +351,7 @@ export default function Game({ initialColor = 'white' }: GameProps) {
                 <div className="mb-4">
                     <div className="mb-2 p-2 border-2 border-zinc-100 rounded-xl flex items-center justify-center">
                         <Link
-                            href={'/'}
+                            href={'https://chessgame-85747.vercel.app/'}
                             className="flex items-center gap-2 hover:text-blue-500 transition-colors duration-200"
                         >
                             <Home className="h-5 w-5" />

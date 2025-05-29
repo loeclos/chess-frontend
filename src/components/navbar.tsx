@@ -15,15 +15,22 @@ const Navbar: React.FC = () => {
 
     return (
         <nav className="flex items-center justify-start p-4">
-            <button
-                onClick={handleHomeClick}
-                className="w-full md:w-min bg-[#4682a8] text-white px-4 py-2 rounded-md hover:bg-[#6d98ba] transition-colors duration-300 cursor-pointer"
+            <Link
+                href={'https://chessgame-85747.vercel.app/'}
+                className="flex items-center"
             >
-                {/* <Home className="mr-2" /> */}
-                Home
-            </button>
-            <Link href={'https://github.com/valdemirum/chess-frontend'} className="flex items-center ml-auto">
-
+                <button
+                    onClick={handleHomeClick}
+                    className="w-full md:w-min bg-[#4682a8] text-white px-4 py-2 rounded-md hover:bg-[#6d98ba] transition-colors duration-300 cursor-pointer"
+                >
+                    {/* <Home className="mr-2" /> */}
+                    Home
+                </button>
+            </Link>
+            <Link
+                href={'https://github.com/valdemirum/chess-frontend'}
+                className="flex items-center ml-auto"
+            >
                 <Image
                     src="/github.png"
                     alt="Logo"
