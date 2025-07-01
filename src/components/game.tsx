@@ -177,7 +177,7 @@ const updateStatus = (): void => {
     }, []);
 
     useEffect(() => {
-        const newSocket = io('http://localhost:3037', {
+        const newSocket = io('https://chess-backend-lv8y.onrender.com', {
             transports: ['websocket'],
             reconnectionAttempts: 5,
             reconnectionDelay: 1000,
